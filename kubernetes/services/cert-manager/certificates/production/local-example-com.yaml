@@ -1,0 +1,14 @@
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: local-litts-xyz
+  namespace: traefik
+spec:
+  secretName: local-litts-xyz-tls
+  issuerRef:
+    name: letsencrypt-production
+    kind: ClusterIssuer
+  commonName: "*.litts.xyz"
+  dnsNames:
+  - "*.litts.xyz"
