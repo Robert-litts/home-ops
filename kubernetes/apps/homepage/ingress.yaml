@@ -1,0 +1,28 @@
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: homepage-ingress
+  namespace: homepage
+  annotations: 
+    kubernetes.io/ingress.class: traefik-external
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: Host(`www.home.litts.xyz`) # change me
+      kind: Rule
+      services:
+        - name: homepage
+          port: 3000
+    - match: Host(`home.litts.xyz`) # change me
+      kind: Rule
+      services:
+        - name: homepage
+          port: 3000
+          scheme: https
+          passHostHeader: true
+      middlewares:
+        - name: default-headers
+  tls:
+    secretName: local-litts-xyz-tls # change me

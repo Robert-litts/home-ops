@@ -1,0 +1,10 @@
+#nodeSelector: 
+#  worker: "true"
+
+service:
+  enabled: true
+  type: ClusterIP
+  annotations: {}
+  labels: {}
+  loadBalancerSourceRanges: []
+  externalIPs: []
