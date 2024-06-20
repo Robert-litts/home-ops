@@ -1,2 +1,2 @@
-# home-ops
+# Home Operations!
 Terraform, Kubernetes, Ansible, and more.
