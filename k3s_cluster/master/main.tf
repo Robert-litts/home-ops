@@ -2,8 +2,8 @@ resource "proxmox_vm_qemu" "k3s_master" {
   count = 3 #how many master nodes
   name = "k3s-master-${count.index + 1}" 
   onboot = true
-  target_node = ${var.proxmox_host}
-  clone = ${var.template_name}
+  target_node = var.proxmox_host
+  clone = var.template_name
   agent = 1
   os_type = "cloud-init"
   cores = 2
@@ -13,7 +13,7 @@ resource "proxmox_vm_qemu" "k3s_master" {
 
   numa = true
 
-  cloudinit_cdrom_storage = ${var.storage}
+  cloudinit_cdrom_storage = var.storage
   scsihw = "virtio-scsi-single"
   bootdisk = "scsi0"
   boot = "order=scsi0;ide3" 
@@ -22,7 +22,7 @@ resource "proxmox_vm_qemu" "k3s_master" {
         scsi {
             scsi0 {
                 disk {
-                  storage = ${var.storage}
+                  storage = var.storage
                   size = 10
                 }
             }
@@ -39,7 +39,7 @@ resource "proxmox_vm_qemu" "k3s_master" {
   nameserver = "192.168.5.1"
   
   sshkeys = <<EOF
-  ${var.ssh_key}
+  var.ssh_key
   EOF
 }
 
